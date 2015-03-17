@@ -34,7 +34,7 @@ public:
 static void create_transport() {
   auto transport = make<MyTransport>(12345);
   transport->on_connect([transport]() {
-    //transport.close();
+    transport->close();
   });
   transport->emit_connect();
 }
