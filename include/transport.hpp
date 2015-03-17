@@ -12,19 +12,19 @@
 /// \brief Mocked transport
 ///
 
-#include <functional>
 #include <string>
 
 #include "constraints.hpp"
+#include "slot.hpp"
 
 namespace cxx_experiments {
 
 class Transport : public NonCopyable, public NonMovable {
 
-  std::function<void()> connect_handler;
-  std::function<void(std::string)> data_handler;
-  std::function<void()> flush_handler;
-  std::function<void(int)> error_handler;
+  Slot<void()> connect_handler;
+  Slot<void(std::string)> data_handler;
+  Slot<void()> flush_handler;
+  Slot<void(int)> error_handler;
 
   int filedesc;
 
@@ -36,22 +36,10 @@ public:
   void on_flush(std::function<void()> fn) { flush_handler = fn; }
   void on_error(std::function<void(int)> fn) { error_handler = fn; }
 
-  void emit_connect() {
-    auto h = connect_handler;
-    h();
-  }
-  void emit_data(std::string d) {
-    auto h = data_handler;
-    h(d);
-  }
-  void emit_flush() {
-    auto h = flush_handler;
-    h();
-  }
-  void emit_error(int e) {
-    auto h = error_handler;
-    h(e);
-  }
+  void emit_connect() { connect_handler(); }
+  void emit_data(std::string d) { data_handler(d); }
+  void emit_flush() { flush_handler(); }
+  void emit_error(int e) { error_handler(e); }
 
   int get_filedesc() { return filedesc; }
 
