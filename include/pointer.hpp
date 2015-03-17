@@ -37,5 +37,9 @@ public:
   }
 };
 
+template <typename T, typename... A> Pointer<T> make(A&&... args) {
+  return Pointer<T>(new T(std::forward<A>(args)...));
+}
+
 }
 #endif

@@ -16,7 +16,7 @@
 using namespace cxx_experiments;
 
 static void create_transport() {
-  Pointer<Transport> transport(new Transport());
+  auto transport = make<Transport>(12345);
   transport->on_connect([transport]() {
     ; /* nothing */
   });
