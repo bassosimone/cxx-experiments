@@ -22,14 +22,14 @@ template <typename T> class Pointer : public std::shared_ptr<T> {
   using std::shared_ptr<T>::shared_ptr;
 
 public:
-  T *operator->() {
+  T *operator->() const {
     if (std::shared_ptr<T>::get() == nullptr) {
       throw std::runtime_error("Null pointer deference");
     }
     return std::shared_ptr<T>::operator->();
   }
 
-  typename std::add_lvalue_reference<T>::type operator*() {
+  typename std::add_lvalue_reference<T>::type operator*() const {
     if (std::shared_ptr<T>::get() == nullptr) {
       throw std::runtime_error("Null pointer deference");
     }
