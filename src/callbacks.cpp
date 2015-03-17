@@ -24,13 +24,19 @@ public:
   }
 
   ~MyTransport() { std::cout << "Destruct " << this << "\n"; }
+
+  void emit_connect() {
+    std::cout << "Connect " << this << "\n";
+    Transport::emit_connect();
+  }
 };
 
 static void create_transport() {
   auto transport = make<MyTransport>(12345);
   transport->on_connect([transport]() {
-    ; /* nothing */
+    //transport.close();
   });
+  transport->emit_connect();
 }
 
 int main() { create_transport(); }

@@ -42,6 +42,14 @@ public:
   void emit_error(int e) { error_handler(e); }
 
   int get_filedesc() { return filedesc; }
+
+  void close() {
+    connect_handler = nullptr;
+    data_handler = nullptr;
+    flush_handler = nullptr;
+    error_handler = nullptr;
+    filedesc = -1;
+  }
 };
 
 }
