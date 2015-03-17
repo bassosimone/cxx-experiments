@@ -13,6 +13,7 @@
 ///
 
 #include <memory>
+#include <stdexcept>
 
 namespace cxx_experiments {
 
