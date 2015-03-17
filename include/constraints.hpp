@@ -8,7 +8,7 @@
 #define CONSTRAINTS_HPP
 
 ///
-/// \file constraints.hpp
+/// \file include/constraints.hpp
 /// \brief Constraints for objects
 ///
 

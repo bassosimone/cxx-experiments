@@ -8,7 +8,7 @@
 #define TRANSPORT_HPP
 
 ///
-/// \file transport.hpp
+/// \file include/transport.hpp
 /// \brief Mocked transport
 ///
 

@@ -8,7 +8,7 @@
 #define POINTER_HPP
 
 ///
-/// \file pointer.hpp
+/// \file include/pointer.hpp
 /// \brief Smart pointer
 ///
 
