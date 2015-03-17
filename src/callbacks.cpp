@@ -31,12 +31,16 @@ public:
   }
 };
 
-static void create_transport() {
+static MyTransport *create_transport() {
   auto transport = make<MyTransport>(12345);
   transport->on_connect([transport]() {
     transport->close();
   });
-  transport->emit_connect();
+  return transport.get();
 }
 
-int main() { create_transport(); }
+int main() {
+  auto pointer = create_transport();
+  std::cout << "Returned\n";
+  pointer->emit_connect();
+}
