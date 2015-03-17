@@ -4,8 +4,8 @@
  * CXX Experiments is free software. See AUTHORS and LICENSE for more
  * information on the copying conditions.
  */
-#ifndef ANTANI_HPP
-#define ANTANI_HPP
+#ifndef CONSTRAINTS_HPP
+#define CONSTRAINTS_HPP
 
 ///
 /// \file constraints.hpp
