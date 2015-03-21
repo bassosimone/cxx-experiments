@@ -1,5 +1,7 @@
 .DS_Store
-src/callbacks
+src/closure_manual
+src/closure_slots
+src/closure_wrong
 src/pointers_and_containers
 src/net_test_leak
 src/net_test_nonleak

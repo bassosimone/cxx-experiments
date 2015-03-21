@@ -19,13 +19,15 @@
 
 using namespace cxx_experiments;
 
+class Antani {};
+
 int main() {
-    std::set<Pointer<Transport>> set;
-    Pointer<Transport> transport = make<Transport>();
-    set.insert(transport);
-    Pointer<Transport> t2 = transport;
+    std::set<Pointer<Antani>> set;
+    Pointer<Antani> antani = make<Antani>();
+    set.insert(antani);
+    Pointer<Antani> t2 = antani;
     set.insert(t2);
-    Pointer<Transport> t3 = t2;
+    Pointer<Antani> t3 = t2;
     set.insert(t3);
     if (set.size() != 1) {
         throw std::runtime_error("unexpected error");
