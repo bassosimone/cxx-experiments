@@ -28,21 +28,13 @@ class LeakingNetTest {
     std::function<void()> handle_report;
 
   public:
-    void begin(std::function<void()> fn) {
-        handle_test = fn;
-    }
+    void begin(std::function<void()> fn) { handle_test = fn; }
 
-    void trigger_test() {
-        handle_test();
-    }
+    void trigger_test() { handle_test(); }
 
-    void end(std::function<void()> fn) {
-        handle_report = fn;
-    }
+    void end(std::function<void()> fn) { handle_report = fn; }
 
-    void trigger_report() {
-        handle_report();
-    }
+    void trigger_report() { handle_report(); }
 };
 
 ///
@@ -72,9 +64,7 @@ template <class T> long check_leak() {
     debug("after alloc");
     test->begin([=]() {
         debug("inside begin callback");
-        test->end([=]() {
-            debug("inside end callback");
-        });
+        test->end([=]() { debug("inside end callback"); });
         debug("after test->end()");
         test->trigger_report();
     });

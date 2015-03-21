@@ -14,6 +14,4 @@
 
 using namespace cxx_experiments;
 
-int main() {
-    closure_example<TransportManual>();
-}
+int main() { closure_example<TransportManual>(); }

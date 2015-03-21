@@ -14,6 +14,4 @@
 
 using namespace cxx_experiments;
 
-int main() {
-    closure_example<TransportWrong>();
-}
+int main() { closure_example<TransportWrong>(); }

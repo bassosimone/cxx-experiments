@@ -15,17 +15,17 @@
 namespace cxx_experiments {
 
 class NonCopyable {
-public:
-  NonCopyable() {}
-  NonCopyable(NonCopyable &) = delete;
-  NonCopyable &operator=(NonCopyable &) = delete;
+  public:
+    NonCopyable() {}
+    NonCopyable(NonCopyable &) = delete;
+    NonCopyable &operator=(NonCopyable &) = delete;
 };
 
 class NonMovable {
-public:
-  NonMovable() {}
-  NonMovable(NonMovable &&) = delete;
-  NonMovable &operator=(NonMovable &&) = delete;
+  public:
+    NonMovable() {}
+    NonMovable(NonMovable &&) = delete;
+    NonMovable &operator=(NonMovable &&) = delete;
 };
 
 }

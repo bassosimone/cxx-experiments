@@ -14,6 +14,4 @@
 
 using namespace cxx_experiments;
 
-int main() {
-    (void) check_leak<NonLeakingNetTest>();
-}
+int main() { (void)check_leak<NonLeakingNetTest>(); }
