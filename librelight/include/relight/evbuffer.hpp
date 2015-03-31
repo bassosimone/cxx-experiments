@@ -7,51 +7,23 @@
 
 #pragma once
 
-#include <memory>
-#include <stdexcept>
+#include <relight/pointer.hpp>
 
 #include <event2/buffer.h>
 
 namespace relight {
 
-class EvBufferIovec {
+inline Pointer<iovec> make_iovec(size_t s) {
+    if (s <= 0)
+        throw std::runtime_error("bad iovec size");
+    return Pointer<iovec>{new iovec[s]};
+}
 
-    std::shared_ptr<iovec> iov;
-    size_t size_;
+inline Pointer<evbuffer> make_evbuffer() {
+    return Pointer<evbuffer>{evbuffer_new(), [](evbuffer *p) {
+        if (p != nullptr)
+            evbuffer_free(b);
+    }};
+}
 
-  public:
-    EvBufferIovec(size_t s) {
-        if (s == 0)
-            throw std::runtime_error("invalid size");
-        iov.reset(new iovec[s]);
-        size_ = s;
-    }
-
-    iovec *operator[](size_t index) {
-        if (index >= size_)
-            throw std::runtime_error("bad index");
-        return iov.get() + index;
-    }
-
-    operator iovec *() { return iov.get(); }
-
-    size_t size() { return size_; }
-};
-
-class EvBuffer {
-    std::shared_ptr<evbuffer> evbuf{
-        evbuffer_new(), [](evbuffer *b) {
-            if (b != nullptr)
-                evbuffer_free(b);
-        }
-    };
-
-  public:
-    operator evbuffer *() {
-        auto ptr = evbuf.get();
-        if (ptr == nullptr)
-            throw std::runtime_error("null pointer");
-        return ptr;
-    }
-};
 }
