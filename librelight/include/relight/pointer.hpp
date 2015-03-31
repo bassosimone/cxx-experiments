@@ -12,37 +12,6 @@
 
 namespace relight {
 
-template <typename T> class CPointer {
-
-    T *pointer = nullptr;
-
-  public:
-
-    CPointer() {}
-    CPointer(T *p) : pointer(p) {}
-
-    CPointer &operator=(T *p) {
-        pointer = p;
-        return *this;
-    }
-
-    operator bool() const { return pointer != nullptr; }
-
-    operator T *() const {
-        if (!pointer) {
-            throw std::runtime_error("null pointer");
-        }
-        return pointer;
-    }
-
-    T *operator->() const {
-        if (!pointer) {
-            throw std::runtime_error("null pointer");
-        }
-        return pointer;
-    }
-};
-
 template <typename T> class Pointer {
 
     std::shared_ptr<T> pointer;

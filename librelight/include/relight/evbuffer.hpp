@@ -40,14 +40,11 @@ class EvBufferIovec {
 
 class EvBuffer {
     std::shared_ptr<evbuffer> evbuf{
-        evbuffer_new(),
-        EvBuffer::free
+        evbuffer_new(), [](evbuffer *b) {
+            if (b != nullptr)
+                evbuffer_free(b);
+        }
     };
-
-    static void free(evbuffer *b) {
-        if (b != nullptr)
-            evbuffer_free(b);
-    }
 
   public:
     operator evbuffer *() {
