@@ -8,6 +8,7 @@
 #pragma once
 
 #include <relight/error.hpp>
+#include <relight/method.hpp>
 #include <relight/pointer.hpp>
 
 namespace relight {
@@ -16,19 +17,19 @@ using namespace relight;
 
 struct Transport {
 
-    std::function<void()> on_connect;
+    Method<void()> on_connect;
 
-    std::function<void(const void *, size_t)> on_data;
+    Method<void(const void *, size_t)> on_data;
 
-    std::function<void()> on_flush;
+    Method<void()> on_flush;
 
-    std::function<void(Pointer<Error>)> on_error;
+    Method<void(Pointer<Error>)> on_error;
 
-    std::function<void()> on_destroy;
+    Method<void()> on_destroy;
 
-    std::function<void(const void *, size_t)> send;
+    Method<void(const void *, size_t)> send;
 
-    std::function<void()> close;
+    Method<void()> close;
 };
 
 Pointer<Transport> make_transport() {

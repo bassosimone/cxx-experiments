@@ -75,18 +75,17 @@ Pointer<Transport> bufferevent_attach(CPointer<event_base> base,
         }
     };
     context->transport->close = [context]() {
-        auto safe_extra_ref = context;
-        if (safe_extra_ref->transport->on_destroy)
-            safe_extra_ref->transport->on_destroy();
-        safe_extra_ref->transport->on_connect = nullptr;
-        safe_extra_ref->transport->on_data = nullptr;
-        safe_extra_ref->transport->send = nullptr;
-        safe_extra_ref->transport->on_flush = nullptr;
-        safe_extra_ref->transport->on_destroy = nullptr;
-        safe_extra_ref->transport->on_error = nullptr;
-        safe_extra_ref->transport = nullptr;
-        bufferevent_free(safe_extra_ref->bufev);
-        safe_extra_ref->bufev = nullptr;
+        if (context->transport->on_destroy)
+            context->transport->on_destroy();
+        context->transport->on_connect = nullptr;
+        context->transport->on_data = nullptr;
+        context->transport->send = nullptr;
+        context->transport->on_flush = nullptr;
+        context->transport->on_destroy = nullptr;
+        context->transport->on_error = nullptr;
+        context->transport = nullptr;
+        bufferevent_free(context->bufev);
+        context->bufev = nullptr;
     };
 
     return context->transport;
