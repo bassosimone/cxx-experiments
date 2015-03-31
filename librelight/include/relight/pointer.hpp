@@ -18,6 +18,7 @@ template <typename T> class Pointer {
 
   public:
     Pointer() {}
+    template <class Deleter> Pointer(T *p, Deleter d) : pointer(p, d) {}
     Pointer(T *p) : pointer(p) {}
 
     Pointer &operator=(T *p) {
@@ -35,6 +36,13 @@ template <typename T> class Pointer {
     }
 
     T *operator->() const {
+        if (!pointer) {
+            throw std::runtime_error("null pointer");
+        }
+        return pointer.get();
+    }
+
+    T *get() const {
         if (!pointer) {
             throw std::runtime_error("null pointer");
         }
