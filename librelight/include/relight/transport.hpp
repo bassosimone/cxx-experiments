@@ -13,8 +13,6 @@
 
 namespace relight {
 
-using namespace relight;
-
 struct Transport {
 
     Method<void()> on_connect;
@@ -32,7 +30,4 @@ struct Transport {
     Method<void()> close;
 };
 
-Pointer<Transport> make_transport() {
-    return Pointer<Transport>{new Transport};
-}
 }
