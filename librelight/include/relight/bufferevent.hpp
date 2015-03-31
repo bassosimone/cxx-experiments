@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include <relight/libevent/evbuffer.hpp>
+#include <relight/evbuffer.hpp>
 #include <relight/pointer.hpp>
 #include <relight/transport.hpp>
 

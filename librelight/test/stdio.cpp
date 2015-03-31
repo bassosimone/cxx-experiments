@@ -5,8 +5,8 @@
 // information on the copying conditions.
 //
 
-#include <relight/libevent/bufferevent.hpp>
-#include <relight/libevent/loop.hpp>
+#include <relight/bufferevent.hpp>
+#include <relight/loop.hpp>
 
 #include <iostream>
 
