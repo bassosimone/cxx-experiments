@@ -13,7 +13,7 @@
 using namespace relight;
 
 int main() {
-    loop([](WeakPointer<event_base> base, WeakPointer<evdns_base>) {
+    loop([](CPointer<event_base> base, CPointer<evdns_base>) {
         Pointer<Transport> t = bufferevent_attach(base, 0);
         t->on_data = [t](const void *d, size_t n) {
             std::cerr << "got data\n";

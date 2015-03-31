@@ -16,8 +16,8 @@
 
 namespace relight {
 
-void loop(std::function<void(WeakPointer<event_base>,
-          WeakPointer<evdns_base>)> setup) {
+void loop(std::function<void(CPointer<event_base>,
+          CPointer<evdns_base>)> setup) {
 
     std::shared_ptr<event_base> base{event_base_new(), [](event_base *b) {
         if (b) {
@@ -36,8 +36,8 @@ void loop(std::function<void(WeakPointer<event_base>,
     if (!dns)
         throw std::bad_alloc();
 
-    setup(WeakPointer<event_base>{base.get()},
-          WeakPointer<evdns_base>{dns.get()});
+    setup(CPointer<event_base>{base.get()},
+          CPointer<evdns_base>{dns.get()});
 
     if (event_base_dispatch(base.get()) != 0)
         throw std::runtime_error("event_base_dispatch() failed");

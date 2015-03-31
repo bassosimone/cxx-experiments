@@ -12,16 +12,16 @@
 
 namespace relight {
 
-template <typename T> class WeakPointer {
+template <typename T> class CPointer {
 
     T *pointer = nullptr;
 
   public:
 
-    WeakPointer() {}
-    WeakPointer(T *p) : pointer(p) {}
+    CPointer() {}
+    CPointer(T *p) : pointer(p) {}
 
-    WeakPointer &operator=(T *p) {
+    CPointer &operator=(T *p) {
         pointer = p;
         return *this;
     }

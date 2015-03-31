@@ -16,12 +16,12 @@
 
 namespace relight {
 
-Pointer<Transport> bufferevent_attach(WeakPointer<event_base> base,
+Pointer<Transport> bufferevent_attach(CPointer<event_base> base,
                                       evutil_socket_t sockfd) {
 
     struct Context {
         Pointer<Transport> transport;
-        WeakPointer<bufferevent> bufev;
+        CPointer<bufferevent> bufev;
 
         static void do_read(bufferevent *, void *opaque) {
 
@@ -29,8 +29,8 @@ Pointer<Transport> bufferevent_attach(WeakPointer<event_base> base,
             EvBuffer buffer;
 
             {
-                WeakPointer<Context> ctx = static_cast<Context *>(opaque);
-                WeakPointer<evbuffer> src = bufferevent_get_input(ctx->bufev);
+                CPointer<Context> ctx = static_cast<Context *>(opaque);
+                CPointer<evbuffer> src = bufferevent_get_input(ctx->bufev);
                 if (evbuffer_add_buffer(buffer, src) != 0)
                     throw std::runtime_error("evbuffer_add_buffer() failed");
                 transport = ctx->transport;
@@ -49,12 +49,12 @@ Pointer<Transport> bufferevent_attach(WeakPointer<event_base> base,
         }
 
         static void do_write(bufferevent *, void *opaque) {
-            WeakPointer<Context> ctx = static_cast<Context *>(opaque);
+            CPointer<Context> ctx = static_cast<Context *>(opaque);
             ctx->transport->on_flush();
         }
 
         static void do_error(bufferevent *, short what, void *opaque) {
-            WeakPointer<Context> ctx = static_cast<Context *>(opaque);
+            CPointer<Context> ctx = static_cast<Context *>(opaque);
             Pointer<Error> err = new Error(what);
             ctx->transport->on_error(err);
         }
