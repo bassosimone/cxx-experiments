@@ -39,15 +39,22 @@ class EvBufferIovec {
 };
 
 class EvBuffer {
-    std::shared_ptr<evbuffer> evbuf{evbuffer_new(), EvBuffer::free};
+    std::shared_ptr<evbuffer> evbuf{
+        evbuffer_new(),
+        EvBuffer::free
+    };
 
     static void free(evbuffer *b) {
-        if (b) {
+        if (b != nullptr)
             evbuffer_free(b);
-        }
     }
 
   public:
-    operator evbuffer *() { return evbuf.get(); }
+    operator evbuffer *() {
+        auto ptr = evbuf.get();
+        if (ptr == nullptr)
+            throw std::runtime_error("null pointer");
+        return ptr;
+    }
 };
 }
